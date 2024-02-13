@@ -1,0 +1,1143 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "L5 OpenApi",
+        "description": "L5 Swagger OpenApi description",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/admin/register/": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "register new admin",
+                "description": "register new admin",
+                "operationId": "admin/register",
+                "requestBody": {
+                    "description": "Pet object that needs to be added to the store",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "Updated name of the pet",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": " email of the pet",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": " password of the pet",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/login/": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "login  admin",
+                "description": "login  admin",
+                "operationId": "admin/login",
+                "requestBody": {
+                    "description": "login Admin",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": " email",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": " password",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/category/": {
+            "get": {
+                "tags": [
+                    "category"
+                ],
+                "summary": "Get list of category",
+                "description": "Returns a list of category",
+                "operationId": "category/list",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/category": {
+            "post": {
+                "tags": [
+                    "category"
+                ],
+                "summary": "Store multiple categories",
+                "description": "Store new categories.",
+                "operationId": "category/store",
+                "requestBody": {
+                    "description": "Array of categories to store",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Category 1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Categories successfully stored"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid input data"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/category/{id}": {
+            "put": {
+                "tags": [
+                    "category"
+                ],
+                "summary": "category update",
+                "description": "update new category",
+                "operationId": "category/update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id for category",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "category update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Failed operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "category"
+                ],
+                "summary": "category delete",
+                "description": "delete  category",
+                "operationId": "category/delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id for category",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Failed operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/customer/": {
+            "get": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Get list of customer",
+                "description": "Returns a list of customer",
+                "operationId": "customer/list",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Customer  create",
+                "description": "Customer  Customer",
+                "operationId": "Customer/store",
+                "requestBody": {
+                    "description": "Customer create",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "phone",
+                                    "location_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": " name",
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "description": " phone",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": " email",
+                                        "type": "string"
+                                    },
+                                    "location_id": {
+                                        "description": " location_id",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/customer/{id}": {
+            "put": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Customer  create",
+                "description": "Customer  Customer",
+                "operationId": "Customer/update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id for category",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Customer create",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "phone",
+                                    "location_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": " name",
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "description": " phone",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": " email",
+                                        "type": "string"
+                                    },
+                                    "location_id": {
+                                        "description": " location_id",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Customer detete",
+                "description": "delete  Customer",
+                "operationId": "Customer/delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id for Customer",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Failed operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/medicines/": {
+            "get": {
+                "tags": [
+                    "Medicines"
+                ],
+                "summary": "Get list of medicines",
+                "description": "Returns a list of medicines",
+                "operationId": "listMedicines",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Medicines"
+                ],
+                "summary": "medicines  create",
+                "description": "medicines  Customer",
+                "operationId": "medicines/store",
+                "requestBody": {
+                    "description": "medicines create",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "generic_name",
+                                    "buying_price",
+                                    "stock_type",
+                                    "stock"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": " name",
+                                        "type": "string"
+                                    },
+                                    "generic_name": {
+                                        "description": " generic_name",
+                                        "type": "string"
+                                    },
+                                    "buying_price": {
+                                        "description": " buying_price",
+                                        "type": "interger"
+                                    },
+                                    "selling_price": {
+                                        "description": " selling_price",
+                                        "type": "interger"
+                                    },
+                                    "stock_type": {
+                                        "description": " stock_type",
+                                        "type": "integer",
+                                        "enum": [
+                                            0,
+                                            1
+                                        ]
+                                    },
+                                    "stock": {
+                                        "description": " stock",
+                                        "type": "interger"
+                                    },
+                                    "category_id": {
+                                        "description": " category_id",
+                                        "type": "interger"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/medicines/{id}": {
+            "get": {
+                "tags": [
+                    "Medicines"
+                ],
+                "summary": " medicines",
+                "description": "medicines",
+                "operationId": "medicines/get{id}",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id of medicines",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Medicines"
+                ],
+                "summary": "medicines  update",
+                "description": "medicines  update",
+                "operationId": "medicines/update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id for category",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "medicines create",
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "generic_name",
+                                    "buying_price",
+                                    "stock_type",
+                                    "stock"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": " name",
+                                        "type": "string"
+                                    },
+                                    "generic_name": {
+                                        "description": " generic_name",
+                                        "type": "string"
+                                    },
+                                    "buying_price": {
+                                        "description": " buying_price",
+                                        "type": "interger"
+                                    },
+                                    "selling_price": {
+                                        "description": " selling_price",
+                                        "type": "interger"
+                                    },
+                                    "stock_type": {
+                                        "description": " stock_type",
+                                        "type": "integer",
+                                        "enum": [
+                                            0,
+                                            1
+                                        ]
+                                    },
+                                    "stock": {
+                                        "description": " stock",
+                                        "type": "interger"
+                                    },
+                                    "category_id": {
+                                        "description": " category_id",
+                                        "type": "interger"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Medicines"
+                ],
+                "summary": "medicines detete",
+                "description": "delete  medicines",
+                "operationId": "medicines/delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id for medicines",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Failed operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/order/": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get record of order",
+                "description": "Returns a list of order",
+                "operationId": "order/list",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/order": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Store order",
+                "description": "Store new order.",
+                "operationId": "order/storesy",
+                "requestBody": {
+                    "description": "Array of categories to store",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "customer_info": {
+                                        "properties": {
+                                            "customer_id": {
+                                                "type": "number",
+                                                "example": "2"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "order_details": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "order_id": {
+                                                    "type": "number",
+                                                    "example": "1"
+                                                },
+                                                "medicine_id": {
+                                                    "type": "number",
+                                                    "example": "1"
+                                                },
+                                                "item_price": {
+                                                    "type": "number",
+                                                    "example": "139"
+                                                },
+                                                "qty": {
+                                                    "type": "number",
+                                                    "example": "4"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "order successfully stored"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": "false"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid input data"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/order/{id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": " order single record",
+                "description": "order single record",
+                "operationId": "order/get{id}",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id of record",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "order detete",
+                "description": "delete  order",
+                "operationId": "order/delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id for order",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Failed operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/location/": {
+            "get": {
+                "tags": [
+                    "location"
+                ],
+                "summary": "Get list of location",
+                "description": "Returns a list of location",
+                "operationId": "location/list",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/location": {
+            "post": {
+                "tags": [
+                    "location"
+                ],
+                "summary": "location store",
+                "description": "store new location",
+                "operationId": "location/store",
+                "requestBody": {
+                    "description": "Location data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Failed operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/admin/location/{id}": {
+            "get": {
+                "tags": [
+                    "location"
+                ],
+                "summary": "Get list of location",
+                "description": "Returns a list of location",
+                "operationId": "location/get{id}",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id of Location",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "location"
+                ],
+                "summary": "location update",
+                "description": "update new location",
+                "operationId": "location/update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id for Location",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Location update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Failed operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "location"
+                ],
+                "summary": "location store",
+                "description": "delete  location",
+                "operationId": "location/delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "pass id for Location",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Failed operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}
